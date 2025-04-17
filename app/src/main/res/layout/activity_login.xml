@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".UI.LoginActivity">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <ImageView
+            android:id="@+id/gambar_logo"
+            android:src="@drawable/logo"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lokasi"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/biru"
+            android:padding="8dp"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textSize="50sp"
+        android:layout_margin="50dp"
+        android:gravity="center"
+        android:textStyle="italic|bold"
+        android:textColor="@color/biru"
+        />
+
+    <EditText
+        android:id="@+id/input_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Masukan Nama"
+        android:drawablePadding="8dp"
+        android:padding="15dp"
+        android:layout_marginVertical="20dp"
+        />
+    <EditText
+        android:id="@+id/input_KataSandi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Masukan Password"
+        android:drawablePadding="8dp"
+        android:padding="15dp"
+        android:layout_marginVertical="4dp"
+        />
+
+    <Button
+        android:layout_marginHorizontal="20dp"
+        android:id="@+id/button_login"
+        android:text="Masuk"
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:padding="10dp"
+        android:backgroundTint="@color/biru"
+        />
+    <Button
+        android:id="@+id/button_daftar"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Daftar"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:padding="10dp"
+        android:layout_marginHorizontal="20dp"
+        android:backgroundTint="@color/biru"
+        />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">ZeQuiz</string>
+    <string name="lokasi" translatable="false">SD Tabita 02 Manado</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nama_Kuis">Nama Topik</string>
+    <string name="Jumlah_kuis">Kuis ke</string>
+    <string name="tanggal">Tanggal</string>
+    <string name="Status">Belum dikerjakan</string>
+
+    <string name="keluar">Keluar</string>
+
+
+</resources>
