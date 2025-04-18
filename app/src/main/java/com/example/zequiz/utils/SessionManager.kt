@@ -9,6 +9,8 @@ class SessionManager(context: Context) {
 
     companion object {
         private const val KEY_TOKEN = "jwt_token"
+        private const val KEY_USERNAME = "username"
+        private const val KEY_KELAS = "kelas"
     }
 
     // Simpan token
@@ -23,10 +25,28 @@ class SessionManager(context: Context) {
         return prefs.getString(KEY_TOKEN, null)
     }
 
-    // Hapus token (biasanya untuk logout)
+    // Hapus token dan data lain (biasanya untuk logout)
     fun clearToken() {
         val editor = prefs.edit()
-        editor.remove(KEY_TOKEN)
+        editor.clear()
         editor.apply()
+    }
+
+    // ✅ Simpan data user (nama dan kelas)
+    fun saveUserInfo(username: String, kelas: Int) {
+        val editor = prefs.edit()
+        editor.putString(KEY_USERNAME, username)
+        editor.putInt(KEY_KELAS, kelas)
+        editor.apply()
+    }
+
+    // ✅ Ambil nama user
+    fun getUsername(): String? {
+        return prefs.getString(KEY_USERNAME, null)
+    }
+
+    // ✅ Ambil kelas user
+    fun getKelas(): Int {
+        return prefs.getInt(KEY_KELAS, 0)
     }
 }

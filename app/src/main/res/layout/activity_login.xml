@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginTop="40dp"
         >
 
         <ImageView
@@ -35,7 +36,7 @@
         android:layout_height="wrap_content"
         android:text="@string/app_name"
         android:textSize="50sp"
-        android:layout_margin="50dp"
+        android:layout_margin="70dp"
         android:gravity="center"
         android:textStyle="italic|bold"
         android:textColor="@color/biru"
@@ -48,13 +49,13 @@
         android:hint="Masukan Nama"
         android:drawablePadding="8dp"
         android:padding="15dp"
-        android:layout_marginVertical="20dp"
+       android:layout_marginTop="90dp"
         />
     <EditText
         android:id="@+id/input_KataSandi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Masukan Password"
+        android:hint="Masukan Kata sandi"
         android:drawablePadding="8dp"
         android:padding="15dp"
         android:layout_marginVertical="4dp"
@@ -64,7 +65,7 @@
         android:layout_marginHorizontal="20dp"
         android:id="@+id/button_login"
         android:text="Masuk"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="35dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
