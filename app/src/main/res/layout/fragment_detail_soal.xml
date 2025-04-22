@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".DetailSoalFragment">
+    tools:context="UI.DetailSoalFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -48,7 +48,6 @@
             android:id="@+id/rv_kuis"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Kuis"
             android:textStyle="bold"
             android:textSize="20sp"
             android:textColor="@color/biru"
@@ -62,7 +61,6 @@
             android:id="@+id/jlm_soal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Pertanyaan ∞/∞"
             android:layout_margin="20dp"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -70,9 +68,9 @@
             app:layout_constraintTop_toBottomOf="@id/rv_kuis"/>
 
         <TextView
+            android:id="@+id/waktu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="∞:∞"
             android:textSize="16sp"
             android:textColor="@color/white"
             android:background="@drawable/rounded_corner"
@@ -107,7 +105,6 @@
                     android:id="@+id/tvSoal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Hitunglah volume kubus ini, dengan jarak A ke B adalah 2."
                     android:textSize="16sp"
                     android:textColor="#000"
                     android:layout_marginBottom="8dp" />
@@ -134,29 +131,25 @@
             <RadioButton
                 android:id="@+id/rbA"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="A. 8" />
+                android:layout_height="wrap_content" />
 
             <RadioButton
                 android:id="@+id/rbB"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="B. 10" />
+                android:layout_height="wrap_content" />
 
             <RadioButton
                 android:id="@+id/rbC"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="C. 7" />
+                android:layout_height="wrap_content" />
 
             <RadioButton
                 android:id="@+id/rbD"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="D. Salto Belakang" />
+                android:layout_height="wrap_content" />
         </RadioGroup>
 
-        <!-- Tombol Navigasi -->
+
         <LinearLayout
             android:id="@+id/btnLayout"
             android:layout_width="0dp"
@@ -169,6 +162,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginBottom="24dp">
 
+            <Button
+                android:id="@+id/btn_Kembali"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/biru"
+                android:textColor="#FFFFFF" />
 
             <View
                 android:layout_width="16dp"
@@ -179,10 +179,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Berikutnya"
                 android:backgroundTint="@color/biru"
                 android:textColor="#FFFFFF" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
+
+

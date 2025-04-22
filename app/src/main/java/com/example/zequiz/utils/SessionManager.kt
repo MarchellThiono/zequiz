@@ -13,7 +13,7 @@ class SessionManager(context: Context) {
         private const val KEY_KELAS = "kelas"
     }
 
-    // Simpan token
+    // Simpan token JWT
     fun saveToken(token: String) {
         val editor = prefs.edit()
         editor.putString(KEY_TOKEN, token)
@@ -25,28 +25,28 @@ class SessionManager(context: Context) {
         return prefs.getString(KEY_TOKEN, null)
     }
 
-    // Hapus token dan data lain (biasanya untuk logout)
+    // Hapus semua data session (biasanya saat logout)
     fun clearToken() {
         val editor = prefs.edit()
         editor.clear()
         editor.apply()
     }
 
-    // ✅ Simpan data user (nama dan kelas)
-    fun saveUserInfo(username: String, kelas: Int) {
+    // Simpan informasi user (username dan kelas sebagai String)
+    fun saveUserInfo(username: String, kelas: String) {
         val editor = prefs.edit()
         editor.putString(KEY_USERNAME, username)
-        editor.putInt(KEY_KELAS, kelas)
+        editor.putString(KEY_KELAS, kelas)
         editor.apply()
     }
 
-    // ✅ Ambil nama user
+    // Ambil nama user
     fun getUsername(): String? {
         return prefs.getString(KEY_USERNAME, null)
     }
 
-    // ✅ Ambil kelas user
-    fun getKelas(): Int {
-        return prefs.getInt(KEY_KELAS, 0)
+    // Ambil kelas user
+    fun getKelas(): String? {
+        return prefs.getString(KEY_KELAS, null)
     }
 }

@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("kotlin-parcelize")
+    id("kotlin-kapt") // Tambahkan di sini
 }
 
 android {
@@ -40,8 +41,7 @@ android {
 }
 
 dependencies {
-
-
+    // AndroidX Libraries
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -51,11 +51,20 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
+
+    // Testing Libraries
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    // Retrofit for network requests
     implementation(libs.retrofit)
     implementation(libs.retrofit2.converter.gson)
 
+    // Glide for image loading
+    implementation("com.github.bumptech.glide:glide:4.12.0")
+    kapt("com.github.bumptech.glide:compiler:4.12.0") // Kapt untuk Glide
+
+    // Optional: Add Glide's ImageView Target dependency if needed
+    // implementation("com.github.bumptech.glide:integration-okhttp3:4.12.0")
 }

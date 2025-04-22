@@ -5,9 +5,11 @@ import kotlinx.parcelize.Parcelize
 
 
 @Parcelize
-data class Scor(
-    val idSiswa: Int,
-    val scorTotal : Int,
-    val jumlahBenar : Int,
-    val jumlahSoal : Int
-) : Parcelable
+data class SkorData(
+    val id: Long,
+    val kuisId: Long,
+    val siswaId: Long,
+    val skor: Int,
+    val namaSiswa: String,
+    val judulKuis: String
+): Parcelable

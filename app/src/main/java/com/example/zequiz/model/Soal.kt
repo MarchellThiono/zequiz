@@ -7,6 +7,7 @@ import kotlinx.parcelize.Parcelize
 data class Soal(
     val id : Int,
     val topikId : Int,
+    val gambar : String,
     val pertanyaan : String,
     val pilihanA : String,
     val pilihanB :String,
