@@ -36,13 +36,11 @@ class DaftarActivity : AppCompatActivity(), View.OnClickListener {
         binding = ActivityDaftarBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
 
         nama = findViewById(R.id.msk_nm)
         kelas = findViewById(R.id.msk_kls)
@@ -50,13 +48,10 @@ class DaftarActivity : AppCompatActivity(), View.OnClickListener {
         konfirmasikatasandi = findViewById(R.id.kataSandi2)
         btndaftar = findViewById(R.id.btn_daftar)
 
-
         btndaftar.setOnClickListener(this)
-
 
         supportActionBar?.hide()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
 
         binding.toolbar.setOnClickListener {
             startActivity(Intent(this@DaftarActivity, LoginActivity::class.java))
@@ -64,48 +59,33 @@ class DaftarActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(view: View?) {
-        val inputnama = nama.text.toString().trim()
-        val inputkelas = kelas.text.toString().trim()
-        val inputkatasandi1 = katasandi.text.toString().trim()
-        val inputkonfirmasikatasandi = konfirmasikatasandi.text.toString().trim()
+        val inputNama = nama.text.toString().trim()
+        val inputKelas = kelas.text.toString().trim()
+        val inputKataSandi = katasandi.text.toString().trim()
+        val inputKonfirmasiKataSandi = konfirmasikatasandi.text.toString().trim()
 
-        var isPasswordMatch = true
-        var isEmptyFields = false
-
-        // Validasi input
-        if (inputnama.isEmpty()) {
-            isEmptyFields = true
-            nama.error = "Tidak Boleh Kosong"
-        }
-        if (inputkelas.isEmpty()) {
-            isEmptyFields = true
-            kelas.error = "Tidak Boleh Kosong"
-        } else {
-            try {
-                // Cek jika kelas valid angka
-                inputkelas.toInt()
-            } catch (e: NumberFormatException) {
-                kelas.error = "Harus berupa angka"
-                isEmptyFields = true
-            }
-        }
-        if (inputkatasandi1.isEmpty()) {
-            isEmptyFields = true
-            katasandi.error = "Tidak Boleh Kosong"
-        }
-        if (inputkonfirmasikatasandi.isEmpty()) {
-            isEmptyFields = true
-            konfirmasikatasandi.error = "Tidak Boleh Kosong"
-        }
-        if (inputkatasandi1 != inputkonfirmasikatasandi) {
-            isPasswordMatch = false
-            konfirmasikatasandi.error = "Kata Sandi Berbeda"
+        if (inputNama.isEmpty() || inputKelas.isEmpty() || inputKataSandi.isEmpty() || inputKonfirmasiKataSandi.isEmpty()) {
+            Toast.makeText(this, "Semua kolom wajib diisi", Toast.LENGTH_SHORT).show()
+            return
         }
 
-        if (!isEmptyFields && isPasswordMatch) {
-            val kelasInt = inputkelas.toInt()
-            registerUser(inputnama, kelasInt, inputkatasandi1, inputkonfirmasikatasandi)
+        if (inputKataSandi != inputKonfirmasiKataSandi) {
+            Toast.makeText(this, "Password dan konfirmasi tidak sama", Toast.LENGTH_SHORT).show()
+            return
         }
+
+        if (inputKelas != "4" && inputKelas != "5" && inputKelas != "6") {
+            Toast.makeText(this, "Kelas hanya boleh 4, 5, atau 6", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // Kalau semua validasi sudah aman, lanjut register
+        registerUser(
+            username = inputNama,
+            kelas = inputKelas.toInt(),
+            kataSandi = inputKataSandi,
+            konfirmasiKataSandi = inputKonfirmasiKataSandi
+        )
     }
 
     private fun registerUser(
@@ -137,7 +117,7 @@ class DaftarActivity : AppCompatActivity(), View.OnClickListener {
                 } else {
                     Toast.makeText(
                         this@DaftarActivity,
-                        "Username telah digunakan ${response.message()}",
+                        "Username telah digunakan atau error: ${response.message()}",
                         Toast.LENGTH_SHORT
                     ).show()
                 }

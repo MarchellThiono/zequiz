@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.buatsoal.BuatSoalFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Baris logo + teks -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/logo" />
+
+
+
+            <TextView
+                android:id="@+id/nmaSklh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lokasi"
+                android:textColor="#2A6D7E"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Garis bawah -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="#2A6D7E" />
+
+        <!-- KOTAK ROUNDED -->
+        <LinearLayout
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/bg_line"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <EditText
+                android:id="@+id/soal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/solid_rec"
+                android:padding="16dp"
+                android:text="@string/soal1"
+                android:textColor="@color/biru"
+                android:textStyle="bold"
+                android:hint="@string/soal2"
+                android:inputType="text"/>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="175dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/dashed_border">
+
+                <ImageView
+                    android:id="@+id/image"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:contentDescription="@string/imageket"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/image_icon" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center_horizontal|bottom"
+                    android:text="@string/imageket"
+                    android:textAlignment="center"
+                    android:textColor="@color/biru"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_horizontal|bottom"
+                    android:text="@string/imageket1"
+                    android:textAlignment="center"
+                    android:textColor="@color/biru"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+            </FrameLayout>
+
+            <EditText
+                android:id="@+id/opsiA"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="40dp"
+                android:background="@drawable/solid_rec"
+                android:padding="16dp"
+                android:inputType="text"
+                android:hint="@string/hint_opsi1"
+                android:textColorHint="@color/biru"/>
+
+            <EditText
+                android:id="@+id/opsiB"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="-35dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/solid_rec"
+                android:padding="16dp"
+                android:inputType="text"
+                android:hint="@string/hint_opsi2"
+                android:textColorHint="@color/biru"/>
+
+            <EditText
+                android:id="@+id/opsiC"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="-2dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/solid_rec"
+                android:padding="16dp"
+                android:inputType="text"
+                android:hint="@string/hint_opsi3"
+                android:textColorHint="@color/biru"/>
+
+            <EditText
+                android:id="@+id/opsiD"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="-2dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/solid_rec"
+                android:padding="16dp"
+                android:inputType="text"
+                android:hint="@string/hint_opsi4"
+                android:textColorHint="@color/biru"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="0dp"
+                android:textColor="@color/biru"
+                android:textSize="20sp"
+                android:text="@string/correct"
+                android:textStyle="bold"
+                android:background="@android:color/transparent"/>
+
+            <EditText
+                android:id="@+id/opsiBenar"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/solid_rec"
+                android:padding="16dp"
+                android:inputType="text"
+                android:text="@string/opsibenar" />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btntmbh"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="40dp"
+            android:background="@drawable/bg_line"
+            android:text="@string/soal"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@color/biru"
+            android:textAllCaps="false" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnsmpn"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="40dp"
+            android:background="@drawable/bg_line"
+            android:text="@string/simpan"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/biru"
+            android:textAllCaps="false" />
+    </LinearLayout>
+
+</ScrollView>

@@ -10,6 +10,8 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.zequiz.R
+import com.example.zequiz.UI.Guru.ui.MainGuruActivity
+import com.example.zequiz.UI.Siswa.MainActivity
 import com.example.zequiz.dataApi.ApiClient
 import com.example.zequiz.databinding.ActivityLoginBinding
 import com.example.zequiz.model.LoginRequest
@@ -42,7 +44,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             val role = sharedPref.getString("ROLE", null)
             when (role) {
                 "SISWA" -> startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-                "GURU" -> startActivity(Intent(this@LoginActivity, MainGuru1Activity::class.java))
+                "GURU" -> startActivity(Intent(this@LoginActivity, MainGuruActivity::class.java))
             }
             finish()
         }
@@ -105,7 +107,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
                     when (role) {
                         "SISWA" -> startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-                        "GURU" -> startActivity(Intent(this@LoginActivity, MainGuru1Activity::class.java))
+                        "GURU" -> startActivity(Intent(this@LoginActivity, MainGuruActivity::class.java))
                         else -> Toast.makeText(this@LoginActivity, "Role tidak dikenali", Toast.LENGTH_SHORT).show()
                     }
                     finish()
