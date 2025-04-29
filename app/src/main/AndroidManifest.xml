@@ -16,10 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ZeQuiz"
         tools:targetApi="31" >
-        <activity
-            android:name=".UI.Guru.ui.MainGuruActivity"
-            android:exported="false"
-            android:label="@string/title_activity_main_guru" />
+        <activity android:name=".UI.MainGuruActivity"
+            android:exported="false"/>
         <activity
             android:name=".UI.MainGuru1Activity"
             android:exported="false" />

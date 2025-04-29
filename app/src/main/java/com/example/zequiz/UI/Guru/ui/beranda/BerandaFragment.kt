@@ -9,23 +9,25 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.zequiz.R
 import com.example.zequiz.UI.LoginActivity
 import com.example.zequiz.adapter.ListKuisAdapter
 import com.example.zequiz.dataApi.ApiClient
 import com.example.zequiz.databinding.FragmentBerandaBinding
 import com.example.zequiz.model.Kuis
 import com.example.zequiz.model.ResponseAllKuis
+import com.example.zequiz.UI.liatscor.LiatScorFragment
+import com.example.zequiz.model.ResponseAllKuisItem
 import com.example.zequiz.utils.SessionManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
 class BerandaFragment : Fragment() {
 
     private var _binding: FragmentBerandaBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var kuisList: ArrayList<Kuis>
+    private lateinit var kuisList: ArrayList<ResponseAllKuisItem>  // Menggunakan ResponseAllKuisItem
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,6 +43,7 @@ class BerandaFragment : Fragment() {
 
         kuisList = ArrayList()
 
+        // Set up RecyclerView
         binding.rvKuisGuru.layoutManager = LinearLayoutManager(requireContext())
         binding.rvKuisGuru.setHasFixedSize(true)
 
@@ -52,10 +55,14 @@ class BerandaFragment : Fragment() {
     private fun setupUserData() {
         val sessionManager = SessionManager(requireContext())
         val nama = sessionManager.getUsername() ?: "User"
-        val kelas = sessionManager.getKelas()
+        val kelas = sessionManager.getKelas() ?: ""
 
         binding.nmUser.text = "Halo, $nama"
-        binding.kelas.text = "Kelas $kelas"
+        binding.kelas.text = if (kelas.startsWith("Kelas")) {
+            kelas
+        } else {
+            "$kelas"
+        }
     }
 
     private fun setupLogoutButton() {
@@ -86,30 +93,37 @@ class BerandaFragment : Fragment() {
                     if (response.isSuccessful && response.body() != null) {
                         kuisList.clear()
 
+                        // Memasukkan ResponseAllKuisItem langsung ke dalam kuisList
                         response.body()?.responseAllKuis?.forEach { item ->
-                            if (item != null) {
-                                val kuis = Kuis(
-                                    id = item.id?.toLong() ?: 0L,
-                                    timer = item.timer ?: 0,
-                                    jumlahSoal = item.jumlahSoal ?: 0,
-                                    tanggal = item.tanggal ?: "",
-                                    topikNama = item.topik?.nama ?: "",
-                                    guruNama = item.guru?.username ?: "",
-                                    kelasNama = item.kelas?.nama ?: ""
-                                )
-                                kuisList.add(kuis)
+                            item?.let {
+                                kuisList.add(it)
                             }
                         }
 
-                        val adapter = ListKuisAdapter(
-                            kuisList,
-                            showStatus = false
-                        ) { kuis ->
-                            // Klik kuis Guru
-                            // Nanti bisa tambah navigasi ke lihat siswa
-                        }
+                        // Set up adapter jika ada kuis yang ditemukan
+                        if (kuisList.isNotEmpty()) {
+                            val adapter = ListKuisAdapter(
+                                kuisList,  // Menggunakan kuisList yang sudah berisi ResponseAllKuisItem
+                                showStatus = false
+                            ) { kuis ->
+                                // Klik kuis Guru
+                                val fragment = LiatScorFragment().apply {
+                                    arguments = Bundle().apply {
+                                        putLong("kuisId", kuis.id?.toLong() ?: 0L) // Mengirimkan ID kuis
+                                    }
+                                }
 
-                        binding.rvKuisGuru.adapter = adapter
+                                parentFragmentManager.beginTransaction()
+                                    .replace(R.id.frame_container, fragment)
+                                    .addToBackStack(null)
+                                    .commit()
+                            }
+                            binding.rvKuisGuru.adapter = adapter
+                        } else {
+                            // Menampilkan pesan jika tidak ada kuis
+                            binding.tvEmptyState.visibility = View.VISIBLE
+                            binding.rvKuisGuru.visibility = View.GONE
+                        }
                     } else {
                         Toast.makeText(requireContext(), "Gagal ambil kuis guru", Toast.LENGTH_SHORT).show()
                     }

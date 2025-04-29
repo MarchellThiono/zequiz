@@ -7,13 +7,15 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.zequiz.R
 import com.example.zequiz.model.Kuis
+import com.example.zequiz.model.ResponseAllKuisItem
 import java.text.SimpleDateFormat
 import java.util.*
 
+
 class ListKuisAdapter(
-    private val listKuis: List<Kuis>,
-    private val showStatus: Boolean = true,  // default true
-    private val onItemClick: (Kuis) -> Unit
+    private var listKuis: List<ResponseAllKuisItem>,  // Menggunakan model ResponseAllKuisItem
+    private val showStatus: Boolean = true,
+    private val onItemClick: (ResponseAllKuisItem) -> Unit
 ) : RecyclerView.Adapter<ListKuisAdapter.ListViewHolder>() {
 
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -34,34 +36,38 @@ class ListKuisAdapter(
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val kuis = listKuis[position]
 
-        // 🏷️ Tampilkan Kuis ke-x
+        // Menampilkan judul kuis
         holder.tvJudulKuis.text = "Kuis ke-${position + 1}"
 
-        // 🏷️ Tampilkan Topik
-        holder.tvTopikKuis.text = kuis.topikNama ?: "Topik Tidak Tersedia"
+        // Menampilkan nama topik
+        holder.tvTopikKuis.text = kuis.topik?.nama ?: "Topik Tidak Tersedia"
 
-        // 🏷️ Format dan Tampilkan Tanggal
+        // Mengonversi tanggal dengan format yang sesuai
         try {
             val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             val outputFormat = SimpleDateFormat("EEEE, dd MMMM yyyy", Locale("id"))
-
-            val date: Date = inputFormat.parse(kuis.tanggal) ?: Date()
+            val date: Date = inputFormat.parse(kuis.tanggal ?: "") ?: Date()
             holder.tvTanggalKuis.text = outputFormat.format(date)
         } catch (e: Exception) {
-            holder.tvTanggalKuis.text = kuis.tanggal
+            holder.tvTanggalKuis.text = kuis.tanggal ?: "Tanggal Tidak Tersedia"
         }
 
-        // 🏷️ Tampilkan Status kalau showStatus == true
+        // Tampilkan status jika diperlukan
         if (showStatus) {
             holder.tvStatusKuis.visibility = View.VISIBLE
-            holder.tvStatusKuis.text = "Belum dikerjakan" // atau update sesuai API nanti
+            holder.tvStatusKuis.text = "Belum dikerjakan"
         } else {
             holder.tvStatusKuis.visibility = View.GONE
         }
 
-        // 🏷️ Set klik listener
+        // Set onClick listener untuk item kuis
         holder.itemView.setOnClickListener {
             onItemClick(kuis)
         }
+    }
+
+    fun updateList(newList: List<ResponseAllKuisItem>) {
+        listKuis = newList
+        notifyDataSetChanged()
     }
 }

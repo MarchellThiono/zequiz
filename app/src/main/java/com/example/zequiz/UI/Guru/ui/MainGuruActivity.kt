@@ -1,14 +1,15 @@
-package com.example.zequiz.UI.Guru.ui
+package com.example.zequiz.UI
 
+import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.zequiz.R
 import com.example.zequiz.databinding.ActivityMainGuruBinding
+import com.example.zequiz.utils.SessionManager
 
 class MainGuruActivity : AppCompatActivity() {
 
@@ -16,21 +17,33 @@ class MainGuruActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainGuruBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val navView: BottomNavigationView = binding.navView
-
         val navController = findNavController(R.id.nav_host_fragment_activity_main_guru)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
+                R.id.navigation_home,
+                R.id.navigation_add,
+                R.id.navigation_banksoal
             )
         )
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+
+        // 🔥 Pasang BottomNavigationView
+        binding.navView.setupWithNavController(navController)
+
+        // ✅ Tambahkan aksi Logout
+        val btnLogout = findViewById<ImageView>(R.id.btn_logout)
+        btnLogout.setOnClickListener {
+            val sessionManager = SessionManager(this)
+            sessionManager.clearToken() // Hapus token JWT
+
+            // Arahkan balik ke LoginActivity
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish() // Tutup activity biar gak bisa klik back
+        }
     }
 }

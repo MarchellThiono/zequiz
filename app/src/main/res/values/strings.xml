@@ -1,20 +1,27 @@
 <resources>
     <string name="app_name">ZeQuiz</string>
+
+    <!-- Lokasi Sekolah -->
     <string name="lokasi" translatable="false">SD Tabita 02 Manado</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
+    <!-- Fragment/Home -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Untuk Tampilan Kuis -->
     <string name="nama_Kuis">Nama Topik</string>
     <string name="Jumlah_kuis">Kuis ke</string>
     <string name="tanggal">Tanggal</string>
     <string name="Status">Belum dikerjakan</string>
 
+    <!-- Button, Toolbar, Logout -->
     <string name="keluar">Keluar</string>
-    <string name="title_activity_main_guru">MainGuruActivity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="home">Beranda</string>
+    <string name="Bank">Bank Soal</string>
+    <string name="menu_add">Add</string>
 
+    <!-- Tambah Soal -->
     <string name="soal1">Ketik Soal</string>
+    <string name="soal2">Masukkan soal</string>
     <string name="imageket">Tambah Gambar</string>
     <string name="imageket1">format .jpg size 500 MB</string>
     <string name="hint_opsi1">a. </string>
@@ -22,20 +29,16 @@
     <string name="hint_opsi3">c. </string>
     <string name="hint_opsi4">d. </string>
     <string name="correct">Jawaban Benar</string>
+    <string name="correct2">Masukkan Jawaban Benar</string>
     <string name="Ts">Tambah Soal</string>
     <string name="simpan">Simpan</string>
-    <string name="soal2">Masukkan soal</string>
-    <string name="tambah_soal_desc">Tombol untuk menambah soal</string>
     <string name="opsibenar">d. </string>
-    <string name="correct2">Masukkan Jawaban Benar</string>
-    <string name="home">Beranda</string>
-    <string name="Bank">Bank Soal</string>
-    <string name="menu_add">Add</string>
+
+    <!-- Tambah Kuis -->
     <string name="topik">Tambah Topik</string>
     <string name="bab1">Bab 1 :</string>
     <string name="soal">Daftar Soal</string>
     <string name="select">Bab 1 : Pecahan</string>
-    <string name="add">""</string>
     <string name="pertanyaan">Siapa Presiden ke-7 Indonesia</string>
     <string name="gambar">Soal Gambar</string>
     <string name="namakuis">Nama Kuis</string>
@@ -44,22 +47,25 @@
     <string name="pengaturan2">Waktu</string>
     <string name="pengaturan3">Topik</string>
     <string name="unggahkuis">Unggah</string>
-    <string name="Jumlah_kuis">Kuis ke</string>
-    <string name="nama_Kuis">Nama Topik</string>
-    <string name="tanggal">Tanggal</string>
-    <string name="Status">Belum dikerjakan</string>
+
+    <!-- Guru Home -->
     <string name="helloguru">Halo, Jess</string>
     <string name="kelasguru">Kelas 4</string>
     <string name="dfrkuis">Daftar Kuis</string>
     <string name="contentdes">bgcard</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Titles Activity -->
+    <string name="title_activity_main_guru">MainGuruActivity</string>
     <string name="title_activity_layer_guru2">LayerGuru2</string>
     <string name="title_home">Home</string>
+    <string name="title_add">Add</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
     <string name="title_tambahkuis">Tambah Kuis</string>
     <string name="title_banksoal">Bank Soal</string>
+
+    <!-- Untuk Liat Skor -->
     <string name="bm">Belum mengerjakan</string>
     <string name="ym">Sudah mengerjakan</string>
-
 
 </resources>

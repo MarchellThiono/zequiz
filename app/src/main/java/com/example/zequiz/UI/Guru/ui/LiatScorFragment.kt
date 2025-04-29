@@ -1,4 +1,4 @@
-package com.example.zequiz.ui.liatscor
+package com.example.zequiz.UI.liatscor
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -42,9 +42,13 @@ class LiatScorFragment : Fragment() {
 
         apiService = ApiService.getInstance()
 
+        //  Tambahkan ini supaya TextView kuis ke-... ikut tampil
+        binding.kuis.text = "Kuis ke-${kuisId}"
+
         setupRecyclerViews()
         loadData()
     }
+
 
     private fun setupRecyclerViews() {
         belumAdapter = BelumMengerjakanAdapter(emptyList())

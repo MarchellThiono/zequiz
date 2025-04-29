@@ -18,16 +18,16 @@ import com.example.zequiz.adapter.ListKuisAdapter
 import com.example.zequiz.dataApi.ApiClient
 import com.example.zequiz.model.Kuis
 import com.example.zequiz.model.ResponseAllKuis
+import com.example.zequiz.model.ResponseAllKuisItem
 import com.example.zequiz.model.Soal
 import com.example.zequiz.utils.SessionManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
 class HomeSiswaFragment : Fragment(), View.OnClickListener {
 
     private lateinit var rvTopik: RecyclerView
-    private lateinit var listKuis: ArrayList<Kuis>
+    private lateinit var listKuis: ArrayList<ResponseAllKuisItem>
     private lateinit var emptyStateText: View
     private lateinit var textNama: TextView
     private lateinit var textKelas: TextView
@@ -45,7 +45,6 @@ class HomeSiswaFragment : Fragment(), View.OnClickListener {
         rvTopik = view.findViewById(R.id.tv_topik)
         emptyStateText = view.findViewById(R.id.tv_empty_state)
         val btnLogout = view.findViewById<ImageView>(R.id.btn_logout)
-
         textNama = view.findViewById(R.id.nm_user)
         textKelas = view.findViewById(R.id.kelas)
 
@@ -54,7 +53,7 @@ class HomeSiswaFragment : Fragment(), View.OnClickListener {
         val kelas = sessionManager.getKelas()
 
         textNama.text = "Halo, $nama"
-        textKelas.text = "Kelas $kelas"
+        textKelas.text = "$kelas"
 
         btnLogout.setOnClickListener {
             showLogoutDialog()
@@ -93,18 +92,8 @@ class HomeSiswaFragment : Fragment(), View.OnClickListener {
                     listKuis.clear()
 
                     response.body()?.responseAllKuis?.forEach { item ->
-                        if (item != null) {
-                            val kuis = Kuis(
-                                id = item.id?.toLong() ?: 0L,
-                                timer = item.timer ?: 0,
-                                jumlahSoal = item.jumlahSoal ?: 0,
-                                tanggal = item.tanggal ?: "",
-                                topikNama = item.topik?.nama ?: "",
-                                guruNama = item.guru?.username ?: "",
-                                topikId = item.topik?.id ?: 0,
-                                kelasNama = item.kelas?.nama ?: ""
-                            )
-                            listKuis.add(kuis)
+                        item?.let {
+                            listKuis.add(it)
                         }
                     }
 
@@ -115,20 +104,22 @@ class HomeSiswaFragment : Fragment(), View.OnClickListener {
                         rvTopik.visibility = View.VISIBLE
                         emptyStateText.visibility = View.GONE
 
+                        // Pasang adapter setelah data ada
                         val adapter = ListKuisAdapter(
                             listKuis,
                             showStatus = true
                         ) { kuis ->
-                            // Klik item kuis
+                            // Tangani klik item kuis
                             AlertDialog.Builder(requireContext())
                                 .setTitle("Konfirmasi")
                                 .setMessage("Apakah kamu sudah siap untuk mengerjakan soal ini?")
                                 .setPositiveButton("Ya") { _, _ ->
-                                    fetchSoalFromServer(kuis.topikId, kuis.timer)
+                                    fetchSoalFromServer(kuis.topik?.id ?: 0, kuis.timer ?: 0)
                                 }
                                 .setNegativeButton("Tidak", null)
                                 .show()
                         }
+
                         rvTopik.adapter = adapter
                     }
                 } else {
@@ -153,7 +144,7 @@ class HomeSiswaFragment : Fragment(), View.OnClickListener {
                     val fragment = DetailSoalFragment().apply {
                         arguments = Bundle().apply {
                             putParcelableArrayList("LIST_SOAL", ArrayList(soalList))
-                            putLong("WAKTU_SOAL", timerMenit * 60_000L) // Timer menit ➔ milidetik
+                            putLong("WAKTU_SOAL", timerMenit * 60_000L)
                         }
                     }
 

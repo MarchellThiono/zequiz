@@ -12,14 +12,14 @@
         tools:layout="@layout/fragment_beranda" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_add"
         android:name="com.example.zequiz.UI.Guru.ui.buatkuis.BuatKuisFragment"
-        android:label="@string/title_dashboard"
+        android:label="@string/title_add"
         tools:layout="@layout/fragment_buat_kuis" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_banksoal"
         android:name="com.example.zequiz.UI.Guru.ui.banksoal.BankSoalFragment"
-        android:label="@string/title_notifications"
+        android:label="@string/title_banksoal"
         tools:layout="@layout/fragment_bank_soal" />
 </navigation>

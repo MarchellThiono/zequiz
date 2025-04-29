@@ -18,8 +18,8 @@ interface ApiService {
     fun loginUser(@Body request: LoginRequest): Call<LoginResponse>
 
     // =================== KUIS ===================
-    @GET("kuis/siswa")
-    fun getAllKuis(@Query("kelasId") kelasId: Long): Call<ResponseAllKuis>   // ✅ Perbaiki disini
+    @GET("kuis/kelas/{kelasId}")
+    fun getAllKuis(@Path("kelasId") kelasId: Long): Call<ResponseAllKuis>  // ✅ Perbaiki disini
 
     // =================== SOAL ===================
     @GET("soal/topik/{id}")

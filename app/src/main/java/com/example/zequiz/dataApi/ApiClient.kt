@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
 
-    private const val BASE_URL = "http://192.168.1.7:8080/zequiz/"
+    private const val BASE_URL = "http://192.168.1.5:8080/zequiz/"
 
     // Inisialisasi SessionManager
     private lateinit var sessionManager: SessionManager

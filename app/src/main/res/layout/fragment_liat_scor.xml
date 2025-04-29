@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.liatscor.LiatScorFragment">
+    tools:context=".UI.Guru.ui.liatscor.LiatScorFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -96,6 +96,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp" />
+
 
     </LinearLayout>
 
