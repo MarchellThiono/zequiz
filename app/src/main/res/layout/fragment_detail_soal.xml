@@ -30,8 +30,7 @@
             app:layout_constraintStart_toEndOf="@id/logoSekolah"
             app:layout_constraintTop_toTopOf="@id/logoSekolah"
             app:layout_constraintBottom_toBottomOf="@id/logoSekolah"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:paddingStart="8dp" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <!-- Card Soal -->
         <LinearLayout
@@ -131,22 +130,26 @@
             <RadioButton
                 android:id="@+id/rbA"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:background="@drawable/opsi_selector"/>
 
             <RadioButton
                 android:id="@+id/rbB"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:background="@drawable/opsi_selector"/>
 
             <RadioButton
                 android:id="@+id/rbC"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:background="@drawable/opsi_selector"/>
 
             <RadioButton
                 android:id="@+id/rbD"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:background="@drawable/opsi_selector"/>
         </RadioGroup>
 
 
@@ -164,11 +167,11 @@
 
             <Button
                 android:id="@+id/btn_Kembali"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="@color/biru"
-                android:textColor="#FFFFFF" />
+                android:textColor="@color/white" />
 
             <View
                 android:layout_width="16dp"
@@ -176,11 +179,11 @@
 
             <Button
                 android:id="@+id/btn_Berikutnya"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:backgroundTint="@color/biru"
-                android:textColor="#FFFFFF" />
+                android:textColor="@color/white" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

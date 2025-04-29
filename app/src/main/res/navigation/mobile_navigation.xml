@@ -22,4 +22,10 @@
         android:name="com.example.zequiz.UI.Guru.ui.banksoal.BankSoalFragment"
         android:label="@string/title_banksoal"
         tools:layout="@layout/fragment_bank_soal" />
+
+    <fragment
+        android:id="@+id/buatSoalFragment"
+        android:name="com.example.zequiz.UI.Guru.ui.buatsoal.BuatSoalFragment"
+        android:label="Buat Soal"
+        tools:layout="@layout/fragment_buat_soal" />
 </navigation>

@@ -19,7 +19,7 @@ interface ApiService {
 
     // =================== KUIS ===================
     @GET("kuis/kelas/{kelasId}")
-    fun getAllKuis(@Path("kelasId") kelasId: Long): Call<ResponseAllKuis>  // ✅ Perbaiki disini
+    fun getAllKuis(@Path("kelasId") kelasId: Long): Call<ResponseAllKuis>
 
     // =================== SOAL ===================
     @GET("soal/topik/{id}")

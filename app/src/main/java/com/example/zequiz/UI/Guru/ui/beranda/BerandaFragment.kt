@@ -14,7 +14,6 @@ import com.example.zequiz.UI.LoginActivity
 import com.example.zequiz.adapter.ListKuisAdapter
 import com.example.zequiz.dataApi.ApiClient
 import com.example.zequiz.databinding.FragmentBerandaBinding
-import com.example.zequiz.model.Kuis
 import com.example.zequiz.model.ResponseAllKuis
 import com.example.zequiz.UI.liatscor.LiatScorFragment
 import com.example.zequiz.model.ResponseAllKuisItem
@@ -44,8 +43,8 @@ class BerandaFragment : Fragment() {
         kuisList = ArrayList()
 
         // Set up RecyclerView
-        binding.rvKuisGuru.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvKuisGuru.setHasFixedSize(true)
+        binding.tvTopik.layoutManager = LinearLayoutManager(requireContext())
+        binding.tvTopik.setHasFixedSize(true)
 
         setupUserData()
         setupLogoutButton()
@@ -118,11 +117,11 @@ class BerandaFragment : Fragment() {
                                     .addToBackStack(null)
                                     .commit()
                             }
-                            binding.rvKuisGuru.adapter = adapter
+                            binding.tvTopik.adapter = adapter
                         } else {
                             // Menampilkan pesan jika tidak ada kuis
                             binding.tvEmptyState.visibility = View.VISIBLE
-                            binding.rvKuisGuru.visibility = View.GONE
+                            binding.tvTopik.visibility = View.GONE
                         }
                     } else {
                         Toast.makeText(requireContext(), "Gagal ambil kuis guru", Toast.LENGTH_SHORT).show()

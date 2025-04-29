@@ -40,6 +40,14 @@
             android:layout_height="3dp"
             android:background="#2A6D7E" />
 
+        <ImageView
+            android:id="@+id/menu_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="6dp"
+            android:src="@drawable/baseline_arrow_back_24" />
         <!-- Nama Kuis -->
         <EditText
             android:id="@+id/namakuis"
@@ -47,12 +55,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="15dp"
             android:background="@drawable/bg_line"
             android:hint="@string/namakuishint"
             android:inputType="text"
             android:padding="16dp"
-            android:text="@string/namakuis"
+
             android:textColor="@color/biru" />
 
         <!-- Baris Jumlah Soal -->
@@ -78,6 +86,7 @@
                 android:id="@+id/spinner_jumlahsoal"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
+                android:entries="@array/jumlahsoal"
                 android:background="@drawable/spinner_background" />
         </LinearLayout>
 
@@ -104,6 +113,7 @@
                 android:id="@+id/spinner_waktu"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
+                android:entries="@array/waktukuis"
                 android:background="@drawable/spinner_background" />
         </LinearLayout>
 

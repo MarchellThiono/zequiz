@@ -1,21 +1,9 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:height="75dp"
-    android:viewportHeight="128"
-    android:viewportWidth="128"
-    android:width="75dp">
-
-    <!-- Background putih -->
-    <path
-        android:fillColor="#FFFFFF"
-        android:pathData="M64,0a64,64 0,1 0,64 64A64,64 0,0 0,64 0Z" />
-
-    <!-- Lingkaran tepi luar -->
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
     <path
         android:fillColor="#2a6d7e"
-        android:pathData="M64,0a64,64 0,1 0,64 64A64.07,64.07,0 0,0 64,0ZM64,122a58,58 0,1 1,58 -58,58.07 58.07,0 0,1 -58,58Z" />
-
-    <!-- Simbol plus -->
-    <path
-        android:fillColor="#2a6d7e"
-        android:pathData="M90,61H67V38a3,3 0,0 0,-6 0v23H38a3,3 0,0 0,0 6h23v23a3,3 0,0 0,6 0V67h23a3,3 0,0 0,0 -6Z" />
+        android:pathData="M19,13H13v6c0,0.55 -0.45,1 -1,1s-1,-0.45 -1,-1v-6H5c-0.55,0 -1,-0.45 -1,-1s0.45,-1 1,-1h6V5c0,-0.55 0.45,-1 1,-1s1,0.45 1,1v6h6c0.55,0 1,0.45 1,1s-0.45,1 -1,1Z"/>
 </vector>

@@ -63,24 +63,30 @@
         android:layout_marginVertical="4dp"
         />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:layout_marginHorizontal="20dp"
         android:id="@+id/button_login"
         android:text="Masuk"
+        android:textColor="@color/white"
         android:layout_marginTop="35dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="290dp"
+        android:layout_height="40dp"
         android:textSize="16sp"
         android:textStyle="bold"
+        android:layout_gravity="center"
+        android:background="@drawable/tombollogin_selector"
         android:padding="10dp"
         android:backgroundTint="@color/biru"
         />
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_daftar"
         android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="290dp"
+        android:layout_height="40dp"
         android:text="Daftar"
+        android:layout_gravity="center"
+        android:textColor="@color/white"
+        android:background="@drawable/tombollogin_selector"
         android:textSize="16sp"
         android:textStyle="bold"
         android:padding="10dp"
