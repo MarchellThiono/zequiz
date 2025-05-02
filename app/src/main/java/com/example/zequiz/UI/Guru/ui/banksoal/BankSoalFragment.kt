@@ -10,6 +10,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.zequiz.R
@@ -23,11 +24,10 @@ class BankSoalFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var soalAdapter: SoalAdapter
-    private val listSoal = ArrayList<Soal>()
+    private val viewModel: BankSoalViewModel by activityViewModels()
 
     // Topik untuk dropdown
     private val topikList = arrayListOf("Bab 1: Pecahan")
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,12 +43,19 @@ class BankSoalFragment : Fragment() {
         setupRecyclerView()
         setupSpinnerTopik()
 
+        // Cek apakah ada soal baru yang dikirim dari BuatSoalFragment
         val soalBaru = arguments?.getParcelable<Soal>("soalBaru")
         soalBaru?.let {
-            listSoal.add(0, it)
-            soalAdapter.notifyItemInserted(0)
-            binding.rvSoal.scrollToPosition(0)
-            Toast.makeText(requireContext(), "Soal baru ditambahkan!", Toast.LENGTH_SHORT).show()
+            val berhasil = viewModel.tambahSoal(it)
+            if (berhasil) {
+                Toast.makeText(requireContext(), "Soal baru ditambahkan!", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireContext(), "Soal sudah mencapai batas maksimum (15)", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        viewModel.listSoal.observe(viewLifecycleOwner) { list ->
+            soalAdapter.submitList(list.toList())
         }
 
         binding.menuAdd.setOnClickListener {
@@ -62,8 +69,9 @@ class BankSoalFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        soalAdapter = SoalAdapter(listSoal) { soal ->
-            showDeleteConfirmation(soal)
+        soalAdapter = SoalAdapter { soal ->
+            viewModel.hapusSoal(soal)
+            Toast.makeText(requireContext(), "Soal berhasil dihapus", Toast.LENGTH_SHORT).show()
         }
         binding.rvSoal.apply {
             layoutManager = LinearLayoutManager(requireContext())
@@ -77,17 +85,16 @@ class BankSoalFragment : Fragment() {
         binding.dropdownField.setAdapter(adapter)
         binding.dropdownField.setText(topikList[0], false)
 
-        // Nonaktifkan input ketik
         binding.dropdownField.inputType = InputType.TYPE_NULL
         binding.dropdownField.keyListener = null
         binding.dropdownField.isFocusable = false
         binding.dropdownField.isCursorVisible = false
 
-        // Saat diklik, munculkan dropdown
         binding.dropdownField.setOnClickListener {
             binding.dropdownField.showDropDown()
         }
     }
+
     private fun showAddTopikDialog() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("Tambah Topik Baru")
@@ -119,22 +126,6 @@ class BankSoalFragment : Fragment() {
         }
 
         builder.show()
-    }
-
-    private fun showDeleteConfirmation(soal: Soal) {
-        AlertDialog.Builder(requireContext())
-            .setTitle("Hapus Soal")
-            .setMessage("Yakin ingin menghapus soal ini?")
-            .setPositiveButton("Hapus") { _, _ ->
-                val index = listSoal.indexOf(soal)
-                if (index != -1) {
-                    listSoal.removeAt(index)
-                    soalAdapter.notifyItemRemoved(index)
-                    Toast.makeText(requireContext(), "Soal berhasil dihapus", Toast.LENGTH_SHORT).show()
-                }
-            }
-            .setNegativeButton("Batal", null)
-            .show()
     }
 
     override fun onDestroyView() {

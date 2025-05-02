@@ -30,8 +30,7 @@
             android:text="@string/lokasi"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@color/biru"
-            android:paddingStart="8dp" />
+            android:textColor="@color/biru" />
 
         <ImageView
             android:id="@+id/btn_logout"

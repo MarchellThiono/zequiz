@@ -8,12 +8,14 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.zequiz.R
+import com.example.zequiz.UI.Guru.ui.banksoal.BankSoalViewModel
 import com.example.zequiz.databinding.FragmentBuatSoalBinding
 import com.example.zequiz.model.Soal
 
 class BuatSoalFragment : Fragment() {
 
     private var _binding: FragmentBuatSoalBinding? = null
+    private lateinit var viewModel: BankSoalViewModel
     private val binding get() = _binding!!
 
     override fun onCreateView(

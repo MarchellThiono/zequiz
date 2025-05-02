@@ -4,15 +4,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.zequiz.R
 import com.example.zequiz.model.Soal
 
 class SoalAdapter(
-    private val listSoal: MutableList<Soal>,
     private val onDeleteClick: (Soal) -> Unit
-) : RecyclerView.Adapter<SoalAdapter.SoalViewHolder>() {
+) : ListAdapter<Soal, SoalAdapter.SoalViewHolder>(DIFF_CALLBACK) {
 
     inner class SoalViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val pertanyaan: TextView = itemView.findViewById(R.id.pertanyaan)
@@ -31,7 +32,7 @@ class SoalAdapter(
     }
 
     override fun onBindViewHolder(holder: SoalViewHolder, position: Int) {
-        val soal = listSoal[position]
+        val soal = getItem(position)
 
         holder.pertanyaan.text = soal.pertanyaan
         holder.opsiA.text = soal.pilihanA
@@ -42,7 +43,7 @@ class SoalAdapter(
         if (soal.gambar.isNotEmpty()) {
             holder.gambarSoal.visibility = View.VISIBLE
             Glide.with(holder.itemView.context)
-                .load("http://IP-ADDRESS-API/uploads/${soal.gambar}") // GANTI sesuai link servermu
+                .load("http://IP-ADDRESS-API/uploads/${soal.gambar}") // Ganti URL servermu
                 .placeholder(R.drawable.placeholder_image)
                 .error(R.drawable.placeholder_image)
                 .into(holder.gambarSoal)
@@ -55,18 +56,15 @@ class SoalAdapter(
         }
     }
 
-    override fun getItemCount(): Int = listSoal.size
+    companion object {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Soal>() {
+            override fun areItemsTheSame(oldItem: Soal, newItem: Soal): Boolean {
+                return oldItem.id == newItem.id
+            }
 
-    fun addSoal(soal: Soal) {
-        listSoal.add(0, soal)
-        notifyItemInserted(0)
-    }
-
-    fun removeSoal(soal: Soal) {
-        val position = listSoal.indexOf(soal)
-        if (position != -1) {
-            listSoal.removeAt(position)
-            notifyItemRemoved(position)
+            override fun areContentsTheSame(oldItem: Soal, newItem: Soal): Boolean {
+                return oldItem == newItem
+            }
         }
     }
 }
