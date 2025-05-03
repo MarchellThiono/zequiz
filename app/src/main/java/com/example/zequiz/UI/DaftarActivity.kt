@@ -13,7 +13,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.zequiz.R
 import com.example.zequiz.dataApi.ApiClient
 import com.example.zequiz.databinding.ActivityDaftarBinding
-import com.example.zequiz.model.RegisterRequest
+import com.example.zequiz.model.UserRegisterReq
 import com.example.zequiz.model.RegisterResponse
 import com.google.android.material.textfield.TextInputEditText
 import retrofit2.Call
@@ -94,7 +94,7 @@ class DaftarActivity : AppCompatActivity(), View.OnClickListener {
         kataSandi: String,
         konfirmasiKataSandi: String
     ) {
-        val request = RegisterRequest(
+        val request = UserRegisterReq(
             username = username,
             kelas = kelas,
             kata_sandi = kataSandi,

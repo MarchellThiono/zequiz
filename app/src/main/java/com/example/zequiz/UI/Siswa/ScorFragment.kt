@@ -10,7 +10,14 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.zequiz.R
+import com.example.zequiz.dataApi.ApiClient
+import com.example.zequiz.model.CalculateQuizRes
+import com.example.zequiz.model.HitungScorReq
+import com.example.zequiz.model.JawabanSiswa
 import com.example.zequiz.utils.SessionManager
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class ScorFragment : Fragment(), View.OnClickListener {
 
@@ -105,5 +112,22 @@ class ScorFragment : Fragment(), View.OnClickListener {
                 commit()
             }
         }
+    }
+
+    fun scor (kuisId : Long, listJawabanSiswa: List<JawabanSiswa>){
+        val apiService = ApiClient.instance
+        apiService.hitungSkor(hitungScorReq = HitungScorReq(listJawabanSiswa),1).enqueue(object : Callback<CalculateQuizRes>{
+            override fun onResponse(
+                call: Call<CalculateQuizRes>,
+                response: Response<CalculateQuizRes>
+            ) {
+                Toast.makeText(requireContext(),response.body()?.skor?:0,Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onFailure(call: Call<CalculateQuizRes>, t: Throwable) {
+              Toast.makeText(requireContext(), t.message.toString(),Toast.LENGTH_SHORT).show()
+            }
+
+        })
     }
 }

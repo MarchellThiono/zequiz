@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.zequiz.R
 import com.example.zequiz.adapter.SoalAdapter
 import com.example.zequiz.databinding.FragmentBankSoalBinding
-import com.example.zequiz.model.Soal
+import com.example.zequiz.model.SoalRes
 
 class BankSoalFragment : Fragment() {
 
@@ -44,7 +44,7 @@ class BankSoalFragment : Fragment() {
         setupSpinnerTopik()
 
         // Cek apakah ada soal baru yang dikirim dari BuatSoalFragment
-        val soalBaru = arguments?.getParcelable<Soal>("soalBaru")
+        val soalBaru = arguments?.getParcelable<SoalRes>("soalBaru")
         soalBaru?.let {
             val berhasil = viewModel.tambahSoal(it)
             if (berhasil) {

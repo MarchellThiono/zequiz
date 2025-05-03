@@ -13,7 +13,7 @@ import com.example.zequiz.R
 import com.example.zequiz.UI.Siswa.MainActivity
 import com.example.zequiz.dataApi.ApiClient
 import com.example.zequiz.databinding.ActivityLoginBinding
-import com.example.zequiz.model.LoginRequest
+import com.example.zequiz.model.UserLoginReq
 import com.example.zequiz.model.LoginResponse
 import com.example.zequiz.utils.SessionManager
 import retrofit2.Call
@@ -78,7 +78,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun loginUser(username: String, kata_sandi: String) {
-        val loginRequest = LoginRequest(username, kata_sandi)
+        val loginRequest = UserLoginReq(username, kata_sandi)
         val apiService = ApiClient.instance
 
         apiService.loginUser(loginRequest).enqueue(object : Callback<LoginResponse> {
@@ -95,8 +95,12 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                     Log.d("LoginRole", "User Role: $role")
 
                     val sessionManager = SessionManager(applicationContext)
-                    sessionManager.saveToken(token)
-                    sessionManager.saveUserInfo(namaUser, kelasUser)
+                    if (token != null) {
+                        sessionManager.saveToken(token)
+                    }
+                    if (namaUser != null) {
+                        sessionManager.saveUserInfo(namaUser, kelasUser.toString())
+                    }
 
                     val sharedPref = getSharedPreferences("MyPref", MODE_PRIVATE)
                     with(sharedPref.edit()) {
