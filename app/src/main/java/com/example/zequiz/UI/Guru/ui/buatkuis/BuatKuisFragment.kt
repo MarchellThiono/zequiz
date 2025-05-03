@@ -7,14 +7,19 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.zequiz.R
 import com.example.zequiz.databinding.FragmentBuatKuisBinding
+import kotlinx.coroutines.launch
 
 class BuatKuisFragment : Fragment() {
 
     private var _binding: FragmentBuatKuisBinding? = null
     private val binding get() = _binding!!
+
+    private val kuisViewModel: BuatKuisViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,7 +32,6 @@ class BuatKuisFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 🔥 Sembunyikan BottomNavigationView
         requireActivity().findViewById<View>(R.id.nav_view)?.visibility = View.GONE
 
         setupSpinner()
@@ -59,28 +63,25 @@ class BuatKuisFragment : Fragment() {
 
     private fun setupSpinner() {
         val jumlahSoalAdapter = ArrayAdapter.createFromResource(
-            requireContext(),
-            R.array.jumlahsoal,
-            android.R.layout.simple_spinner_item
+            requireContext(), R.array.jumlahsoal, android.R.layout.simple_spinner_item
         )
         jumlahSoalAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerJumlahsoal.adapter = jumlahSoalAdapter
 
         val waktuAdapter = ArrayAdapter.createFromResource(
-            requireContext(),
-            R.array.waktukuis,
-            android.R.layout.simple_spinner_item
+            requireContext(), R.array.waktukuis, android.R.layout.simple_spinner_item
         )
         waktuAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerWaktu.adapter = waktuAdapter
 
-        val topikAdapter = ArrayAdapter(
-            requireContext(),
-            android.R.layout.simple_spinner_item,
-            listOf("Topik 1", "Topik 2", "Topik 3")
-        )
-        topikAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.spinnerTopik.adapter = topikAdapter
+        kuisViewModel.topikList.observe(viewLifecycleOwner) { list ->
+            val namaTopik = list.map { it.nama }
+            val topikAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, namaTopik)
+            topikAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.spinnerTopik.adapter = topikAdapter
+        }
+
+        kuisViewModel.fetchTopik()
     }
 
     private fun navigateToBeranda() {
@@ -90,8 +91,6 @@ class BuatKuisFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-
-        // 🔥 Tampilkan lagi BottomNavigationView saat fragment keluar
         requireActivity().findViewById<View>(R.id.nav_view)?.visibility = View.VISIBLE
     }
 }

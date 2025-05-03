@@ -9,12 +9,12 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.zequiz.R
-import com.example.zequiz.model.Soal
+import com.example.zequiz.model.SoalRes
 import java.util.concurrent.TimeUnit
 
 class DetailSoalFragment : Fragment() {
 
-    private lateinit var listSoal: List<Soal>
+    private lateinit var listSoal: List<SoalRes>
     private var indexSaatIni = 0
     private val jawabanUser = mutableMapOf<Int, String>()
 

@@ -10,17 +10,16 @@ import com.example.zequiz.model.ListKuisResItem
 import java.text.SimpleDateFormat
 import java.util.*
 
-class ListKuisAdapter(
+class ListKuisGuruAdapter(
     private var listKuis: List<ListKuisResItem>,
-    private val showStatus: Boolean = true,
     private val onItemClick: (ListKuisResItem) -> Unit
-) : RecyclerView.Adapter<ListKuisAdapter.ListViewHolder>() {
+) : RecyclerView.Adapter<ListKuisGuruAdapter.ListViewHolder>() {
 
     class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val tvJudulKuis: TextView = itemView.findViewById(R.id.tv_name)
-        val tvTopikKuis: TextView = itemView.findViewById(R.id.tv_topik)
-        val tvTanggalKuis: TextView = itemView.findViewById(R.id.tv_tanggal)
-        val tvStatusKuis: TextView = itemView.findViewById(R.id.tv_status)
+        val tvNamaKuis: TextView = itemView.findViewById(R.id.tv_name)
+        val tvTopik: TextView = itemView.findViewById(R.id.tv_topik)
+        val tvTanggal: TextView = itemView.findViewById(R.id.tv_tanggal)
+        val tvJumlahSoal: TextView = itemView.findViewById(R.id.tv_status)  // Bisa diubah ID-nya sesuai layout
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
@@ -34,29 +33,19 @@ class ListKuisAdapter(
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val kuis = listKuis[position]
 
-        // Judul kuis
-        holder.tvJudulKuis.text = kuis.namaKuis ?: "Kuis ke-${position + 1}"
+        holder.tvNamaKuis.text = kuis.namaKuis ?: "Kuis ke-${position + 1}"
+        holder.tvTopik.text = kuis.namaTopik ?: "Topik Tidak Tersedia"
 
-        // Topik kuis
-        holder.tvTopikKuis.text = kuis.namaTopik ?: "Topik Tidak Tersedia"
-
-        // Format tanggal
         try {
             val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             val outputFormat = SimpleDateFormat("EEEE, dd MMMM yyyy", Locale("id"))
             val date: Date = inputFormat.parse(kuis.tanggal ?: "") ?: Date()
-            holder.tvTanggalKuis.text = outputFormat.format(date)
+            holder.tvTanggal.text = outputFormat.format(date)
         } catch (e: Exception) {
-            holder.tvTanggalKuis.text = kuis.tanggal ?: "Tanggal Tidak Tersedia"
+            holder.tvTanggal.text = kuis.tanggal ?: "Tanggal Tidak Tersedia"
         }
 
-        // Status pengerjaan (opsional)
-        if (showStatus) {
-            holder.tvStatusKuis.visibility = View.VISIBLE
-            holder.tvStatusKuis.text = "Belum dikerjakan"
-        } else {
-            holder.tvStatusKuis.visibility = View.GONE
-        }
+        holder.tvJumlahSoal.text = "${kuis.jumlahSoal ?: 0} soal • ${kuis.timer} detik"
 
         holder.itemView.setOnClickListener {
             onItemClick(kuis)

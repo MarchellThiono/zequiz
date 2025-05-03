@@ -16,10 +16,8 @@ import com.example.zequiz.R
 import com.example.zequiz.UI.LoginActivity
 import com.example.zequiz.adapter.ListKuisAdapter
 import com.example.zequiz.dataApi.ApiClient
-import com.example.zequiz.model.Kuis
-import com.example.zequiz.model.ResponseAllKuis
-import com.example.zequiz.model.ResponseAllKuisItem
-import com.example.zequiz.model.Soal
+import com.example.zequiz.model.ListQuizRes
+import com.example.zequiz.model.ListQuizResItem
 import com.example.zequiz.utils.SessionManager
 import retrofit2.Call
 import retrofit2.Callback
@@ -27,7 +25,7 @@ import retrofit2.Response
 class HomeSiswaFragment : Fragment(), View.OnClickListener {
 
     private lateinit var rvTopik: RecyclerView
-    private lateinit var listKuis: ArrayList<ResponseAllKuisItem>
+    private lateinit var listKuis: ArrayList<ListQuizResItem>
     private lateinit var emptyStateText: View
     private lateinit var textNama: TextView
     private lateinit var textKelas: TextView
@@ -83,15 +81,15 @@ class HomeSiswaFragment : Fragment(), View.OnClickListener {
     private fun fetchKuisFromServer() {
         val apiService = ApiClient.instance
 
-        apiService.getAllKuis(4).enqueue(object : Callback<ResponseAllKuis> {
+        apiService.getAllKuis(4).enqueue(object : Callback<ListQuizRes> {
             override fun onResponse(
-                call: Call<ResponseAllKuis>,
-                response: Response<ResponseAllKuis>
+                call: Call<ListQuizRes>,
+                response: Response<ListQuizRes>
             ) {
                 if (response.isSuccessful && response.body() != null) {
                     listKuis.clear()
 
-                    response.body()?.responseAllKuis?.forEach { item ->
+                    response.body()?.listQuizRes?.forEach { item ->
                         item?.let {
                             listKuis.add(it)
                         }
@@ -108,13 +106,13 @@ class HomeSiswaFragment : Fragment(), View.OnClickListener {
                         val adapter = ListKuisAdapter(
                             listKuis,
                             showStatus = true
-                        ) { kuis ->
+                        ) {
                             // Tangani klik item kuis
                             AlertDialog.Builder(requireContext())
                                 .setTitle("Konfirmasi")
                                 .setMessage("Apakah kamu sudah siap untuk mengerjakan soal ini?")
                                 .setPositiveButton("Ya") { _, _ ->
-                                    fetchSoalFromServer(kuis.topik?.id ?: 0, kuis.timer ?: 0)
+//                                    fetchSoalFromServer(it.topik?.id ?: 0, it.timer ?: 0)
                                 }
                                 .setNegativeButton("Tidak", null)
                                 .show()
@@ -127,41 +125,41 @@ class HomeSiswaFragment : Fragment(), View.OnClickListener {
                 }
             }
 
-            override fun onFailure(call: Call<ResponseAllKuis>, t: Throwable) {
+            override fun onFailure(call: Call<ListQuizRes>, t: Throwable) {
                 Toast.makeText(requireContext(), "Error: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
     }
 
-    private fun fetchSoalFromServer(topikId: Int, timerMenit: Int) {
-        val apiService = ApiClient.instance
-
-        apiService.getSoalByTopik(topikId).enqueue(object : Callback<List<Soal>> {
-            override fun onResponse(call: Call<List<Soal>>, response: Response<List<Soal>>) {
-                if (response.isSuccessful && response.body() != null) {
-                    val soalList = response.body()!!
-
-                    val fragment = DetailSoalFragment().apply {
-                        arguments = Bundle().apply {
-                            putParcelableArrayList("LIST_SOAL", ArrayList(soalList))
-                            putLong("WAKTU_SOAL", timerMenit * 60_000L)
-                        }
-                    }
-
-                    requireActivity().supportFragmentManager.beginTransaction()
-                        .replace(R.id.frame_container, fragment)
-                        .addToBackStack(null)
-                        .commit()
-                } else {
-                    Toast.makeText(requireContext(), "Gagal ambil soal", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-            override fun onFailure(call: Call<List<Soal>>, t: Throwable) {
-                Toast.makeText(requireContext(), "Error: ${t.message}", Toast.LENGTH_SHORT).show()
-            }
-        })
-    }
+//    private fun fetchSoalFromServer(topikId: Int, timerMenit: Int) {
+//        val apiService = ApiClient.instance
+//
+//        apiService.getSoalByTopik(topikId).enqueue(object : Callback<List<Soal>> {
+//            override fun onResponse(call: Call<List<Soal>>, response: Response<List<Soal>>) {
+//                if (response.isSuccessful && response.body() != null) {
+//                    val soalList = response.body()!!
+//
+//                    val fragment = DetailSoalFragment().apply {
+//                        arguments = Bundle().apply {
+//                            putParcelableArrayList("LIST_SOAL", ArrayList(soalList))
+//                            putLong("WAKTU_SOAL", timerMenit * 60_000L)
+//                        }
+//                    }
+//
+//                    requireActivity().supportFragmentManager.beginTransaction()
+//                        .replace(R.id.frame_container, fragment)
+//                        .addToBackStack(null)
+//                        .commit()
+//                } else {
+//                    Toast.makeText(requireContext(), "Gagal ambil soal", Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<List<Soal>>, t: Throwable) {
+//                Toast.makeText(requireContext(), "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+//            }
+//        })
+//    }
 
     override fun onClick(v: View?) {
         // Belum ada click tambahan
