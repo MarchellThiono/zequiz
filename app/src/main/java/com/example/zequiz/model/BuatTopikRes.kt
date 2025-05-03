@@ -8,13 +8,13 @@ data class BuatTopikRes(
 	val nama: String? = null,
 
 	@field:SerializedName("kelas")
-	val kelas: Kelas? = null,
+	val kelas: TopikKelas? = null,
 
 	@field:SerializedName("id")
 	val id: Int? = null
 )
 
-data class Kelas(
+data class TopikKelas(
 
 	@field:SerializedName("nama")
 	val nama: String? = null,

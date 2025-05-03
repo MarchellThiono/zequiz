@@ -8,7 +8,7 @@ data class TampilTopikResItem(
 	val nama: String? = null,
 
 	@field:SerializedName("kelas")
-	val kelas: Kelas? = null,
+	val kelas: TampilTopikKelas? = null,
 
 	@field:SerializedName("id")
 	val id: Int? = null
@@ -20,7 +20,7 @@ data class TampilTopikRes(
 	val tampilTopikRes: List<TampilTopikResItem?>? = null
 )
 
-data class Kelas(
+data class TampilTopikKelas(
 
 	@field:SerializedName("nama")
 	val nama: String? = null,

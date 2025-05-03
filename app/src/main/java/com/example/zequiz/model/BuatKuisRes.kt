@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class BuatKuisRes(
 
 	@field:SerializedName("topik")
-	val topik: Topik? = null,
+	val topik: KuisTopik? = null,
 
 	@field:SerializedName("timer")
 	val timer: Int? = null,
@@ -14,7 +14,7 @@ data class BuatKuisRes(
 	val nama: String? = null,
 
 	@field:SerializedName("kelas")
-	val kelas: Kelas? = null,
+	val kelas: KuisKelas? = null,
 
 	@field:SerializedName("tanggal")
 	val tanggal: String? = null,
@@ -26,7 +26,7 @@ data class BuatKuisRes(
 	val jumlahSoal: Int? = null
 )
 
-data class Topik(
+data class KuisTopik(
 
 	@field:SerializedName("nama")
 	val nama: String? = null,
@@ -35,7 +35,7 @@ data class Topik(
 	val id: Int? = null
 )
 
-data class Kelas(
+data class KuisKelas(
 
 	@field:SerializedName("nama")
 	val nama: String? = null,

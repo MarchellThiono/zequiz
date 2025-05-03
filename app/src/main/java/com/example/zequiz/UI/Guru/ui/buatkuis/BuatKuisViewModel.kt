@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.zequiz.api.ApiClient
+import com.example.zequiz.dataApi.ApiService
 import com.example.zequiz.model.Topik
 import kotlinx.coroutines.launch
 
@@ -20,7 +20,7 @@ class BuatKuisViewModel : ViewModel() {
         _isLoading.value = true
         viewModelScope.launch {
             try {
-                val response = ApiClient.apiService.getTopikList() // pastikan ada endpoint ini
+                val response = ApiService.ambilTopik() // pastikan ada endpoint ini
                 _topikList.value = response
             } catch (e: Exception) {
                 _topikList.value = emptyList()

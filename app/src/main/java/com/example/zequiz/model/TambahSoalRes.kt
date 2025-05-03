@@ -32,7 +32,7 @@ data class TambahSoalRes(
 	val pertanyaan: String? = null
 )
 
-data class Topik(
+data class TambahSoalTopik(
 
 	@field:SerializedName("nama")
 	val nama: String? = null,
@@ -44,7 +44,7 @@ data class Topik(
 	val id: Int? = null
 )
 
-data class Kelas(
+data class TambahSoalKelas(
 
 	@field:SerializedName("nama")
 	val nama: String? = null,

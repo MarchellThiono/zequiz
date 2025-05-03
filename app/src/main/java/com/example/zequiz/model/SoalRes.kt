@@ -14,7 +14,7 @@ data class SoalResItem(
 	val jawabanBenar: String? = null,
 
 	@field:SerializedName("topik")
-	val topik: Topik? = null,
+	val topik: SoalTopik? = null,
 
 	@field:SerializedName("opsiA")
 	val opsiA: String? = null,
@@ -38,7 +38,7 @@ data class SoalResItem(
 	val pertanyaan: String? = null
 )
 
-data class Kelas(
+data class SoalKelas(
 
 	@field:SerializedName("nama")
 	val nama: String? = null,
@@ -47,7 +47,7 @@ data class Kelas(
 	val id: Int? = null
 )
 
-data class Topik(
+data class SoalTopik(
 
 	@field:SerializedName("nama")
 	val nama: String? = null,
